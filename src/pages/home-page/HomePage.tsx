@@ -12,7 +12,10 @@ export const HomePage = (): ReactElement => {
 
   const handleAddPost = (newPost: IPost): void => {
     setPosts((prev) => [...prev, newPost]);
-    closeAddModal();
+  };
+
+  const handleDeletePost = (postId: React.Key): void => {
+    setPosts((prev) => prev.filter((post) => post.id !== postId));
   };
 
   return (
@@ -27,7 +30,7 @@ export const HomePage = (): ReactElement => {
       </Button>
       <hr />
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} onDelete={handleDeletePost} />
       ))}
       <AddModal
         isVisible={isAddModalOpen}

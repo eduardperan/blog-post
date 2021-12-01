@@ -20,6 +20,7 @@ export const DescriptionField = ({
         <Form.Label>Description</Form.Label>
         <Form.Control
           {...field}
+          as='textarea'
           placeholder='Enter description'
           isInvalid={invalid}
         />

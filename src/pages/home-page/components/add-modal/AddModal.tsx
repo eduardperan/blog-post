@@ -44,6 +44,7 @@ export const AddModal = ({
       dateCreated: moment().toDate(),
       ...params,
     });
+    closeModal();
   };
 
   const closeModal = (): void => {
