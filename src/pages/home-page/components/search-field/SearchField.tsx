@@ -14,22 +14,19 @@ export const SearchField = (props: SearchFieldProps): ReactElement => {
   };
 
   return (
-    <div className='d-flex justify-content-end'>
-      <FormControl
-        className='w-25'
-        placeholder='Search'
-        aria-label='Search'
-        aria-describedby='Search post'
-        type='text'
-        value={searchKey}
-        onKeyUp={(e) => {
-          if (e.key === "Enter" || e.keyCode === 13) {
-            searchDocs(e);
-          }
-        }}
-        onChange={searchDocs}
-      />
-    </div>
+    <FormControl
+      placeholder='Search'
+      aria-label='Search'
+      aria-describedby='Search post'
+      type='text'
+      value={searchKey}
+      onKeyUp={(e) => {
+        if (e.key === "Enter" || e.keyCode === 13) {
+          searchDocs(e);
+        }
+      }}
+      onChange={searchDocs}
+    />
   );
 };
 

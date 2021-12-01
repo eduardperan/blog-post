@@ -23,6 +23,7 @@ export const DescriptionField = ({
           as='textarea'
           placeholder='Enter description'
           isInvalid={invalid}
+          onFocus={(e) => e.target.select()}
         />
         <Form.Control.Feedback type='invalid'>
           {error?.message}

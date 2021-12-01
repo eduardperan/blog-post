@@ -28,7 +28,7 @@ export const HomePage = (): ReactElement => {
       >
         Create post
       </Button>
-      <PostList posts={posts} setPosts={setPosts} />
+      {posts.length > 0 && <PostList posts={posts} setPosts={setPosts} />}
       <AddModal
         isVisible={isAddModalOpen}
         onAddPost={handleAddPost}

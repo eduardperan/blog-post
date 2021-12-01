@@ -20,6 +20,8 @@ export const TitleField = ({ control }: TitleFieldProps): ReactElement => (
           {...field}
           placeholder='Enter title'
           isInvalid={invalid}
+          autoFocus
+          onFocus={(e) => e.target.select()}
         />
         <Form.Control.Feedback type='invalid'>
           {error?.message}
