@@ -18,7 +18,7 @@ export const PostList = (props: PostListProps): ReactElement => {
   const { posts, setPosts } = props;
   const [searchKey, setSearchKey] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(5);
   const [sort, setSort] = useState<Sort>(DEFAULT_SORT);
 
   const handleDeletePost = (postId: React.Key): void => {

@@ -60,13 +60,7 @@ export const EditModal = (props: EditModalProps): ReactElement => {
   }, [title, description, setValue]);
 
   return (
-    <Modal
-      backdrop='static'
-      keyboard={false}
-      show={isVisible}
-      onHide={closeModal}
-      centered
-    >
+    <Modal backdrop='static' show={isVisible} onHide={closeModal} centered>
       <Form onSubmit={handleSubmit(updatePost)}>
         <Modal.Header closeButton>
           <Modal.Title as='h6'>

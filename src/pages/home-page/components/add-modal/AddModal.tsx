@@ -53,13 +53,7 @@ export const AddModal = ({
   };
 
   return (
-    <Modal
-      backdrop='static'
-      keyboard={false}
-      show={isVisible}
-      onHide={closeModal}
-      centered
-    >
+    <Modal backdrop='static' show={isVisible} onHide={closeModal} centered>
       <Form onSubmit={handleSubmit(createPost)}>
         <Modal.Header closeButton>
           <Modal.Title as='h6'>

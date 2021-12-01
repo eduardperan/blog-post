@@ -6,3 +6,4 @@ export * from "./edit-modal";
 export * from "./search-field";
 export * from "./pagination";
 export * from "./sort-select";
+export * from "./view-modal";

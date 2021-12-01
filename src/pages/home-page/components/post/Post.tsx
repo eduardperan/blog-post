@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import CloseButton from "react-bootstrap/CloseButton";
 import Stack from "react-bootstrap/Stack";
-import { EditModal, DeleteModal } from "../";
+import { EditModal, DeleteModal, ViewModal } from "../";
 
 export interface IPostItem {
   title: string;
@@ -25,6 +25,7 @@ export const Post = (props: PostProps): ReactElement => {
   const { post, onDelete: triggerDelete, onUpdate: triggerUpdate } = props;
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState<boolean>(false);
 
   const handleDelete = (): void => {
     triggerDelete(post.id);
@@ -32,6 +33,10 @@ export const Post = (props: PostProps): ReactElement => {
 
   const handleOpenEditModal = (): void => {
     setIsEditModalOpen(true);
+  };
+
+  const handleOpenViewModal = (): void => {
+    setIsViewModalOpen(true);
   };
 
   const handleOpenDeleteModal = (): void => {
@@ -42,8 +47,12 @@ export const Post = (props: PostProps): ReactElement => {
     setIsEditModalOpen(false);
   };
 
-  const handleClosedeleteModal = (): void => {
+  const handleCloseDeleteModal = (): void => {
     setIsDeleteModalOpen(false);
+  };
+
+  const handleCloseViewModal = (): void => {
+    setIsViewModalOpen(false);
   };
 
   return (
@@ -56,7 +65,9 @@ export const Post = (props: PostProps): ReactElement => {
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.description}</Card.Text>
           <Stack direction='horizontal' gap={1}>
-            <Button variant='outline-secondary'>View</Button>
+            <Button variant='outline-secondary' onClick={handleOpenViewModal}>
+              View
+            </Button>
             <Button variant='light' onClick={handleOpenEditModal}>
               Edit
             </Button>
@@ -73,7 +84,12 @@ export const Post = (props: PostProps): ReactElement => {
         title={post.title}
         isVisible={isDeleteModalOpen}
         onDeletePost={handleDelete}
-        onClose={handleClosedeleteModal}
+        onClose={handleCloseDeleteModal}
+      />
+      <ViewModal
+        post={post}
+        isVisible={isViewModalOpen}
+        onClose={handleCloseViewModal}
       />
     </React.Fragment>
   );

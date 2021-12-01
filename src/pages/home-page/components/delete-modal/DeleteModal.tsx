@@ -15,13 +15,7 @@ export const DeleteModal = ({
   onDeletePost: triggerDeletePost,
   onClose: triggerClose,
 }: DeleteModalProps): ReactElement => (
-  <Modal
-    backdrop='static'
-    keyboard={false}
-    show={isVisible}
-    onHide={triggerClose}
-    centered
-  >
+  <Modal backdrop='static' show={isVisible} onHide={triggerClose} centered>
     <Modal.Header closeButton>
       <Modal.Title as='h6'>
         <b>DELETE POST</b>
