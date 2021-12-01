@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import CloseButton from "react-bootstrap/CloseButton";
 import Stack from "react-bootstrap/Stack";
-import { EditModal, DeleteModal } from "./components";
+import { EditModal, DeleteModal } from "../";
 
 export interface IPostItem {
   title: string;

@@ -5,8 +5,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import * as yup from "yup";
-import { TitleField, DescriptionField } from "../../../add-modal/components";
-import { IPostItem, IPost } from "../../Post";
+import { TitleField, DescriptionField } from "../add-modal/components";
+import { IPostItem, IPost } from "../post";
 
 interface UpdatePostForm extends IPostItem {}
 
