@@ -18,6 +18,15 @@ export const HomePage = (): ReactElement => {
     setPosts((prev) => prev.filter((post) => post.id !== postId));
   };
 
+  const handleUpdatePost = (updatedPost: IPost): void => {
+    setPosts((prev) =>
+      prev.reduce((newPost: IPost[], current: IPost) => {
+        newPost.push(current.id === updatedPost.id ? updatedPost : current);
+        return newPost;
+      }, [])
+    );
+  };
+
   return (
     <React.Fragment>
       <Button
@@ -30,7 +39,12 @@ export const HomePage = (): ReactElement => {
       </Button>
       <hr />
       {posts.map((post) => (
-        <Post key={post.id} post={post} onDelete={handleDeletePost} />
+        <Post
+          key={post.id}
+          post={post}
+          onDelete={handleDeletePost}
+          onUpdate={handleUpdatePost}
+        />
       ))}
       <AddModal
         isVisible={isAddModalOpen}
