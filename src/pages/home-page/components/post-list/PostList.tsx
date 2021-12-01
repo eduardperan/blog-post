@@ -1,21 +1,16 @@
-import React, { ReactElement, useState, useEffect } from "react";
-import { Post, IPost, SearchField } from "../";
-
-export interface PaginationConfig {
-  page: number;
-  size: number;
-}
+import React, { ReactElement, useState, useMemo } from "react";
+import { Post, IPost, SearchField, Pagination } from "../";
 
 export interface PostListProps {
   posts: IPost[];
-  pagination: PaginationConfig;
   setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
 }
 
 export const PostList = (props: PostListProps): ReactElement => {
-  const { posts, pagination, setPosts } = props;
-  const [dataList, setDataList] = useState<IPost[]>([]);
+  const { posts, setPosts } = props;
   const [searchKey, setSearchKey] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(1);
 
   const handleDeletePost = (postId: React.Key): void => {
     setPosts((prev) => prev.filter((post) => post.id !== postId));
@@ -30,27 +25,31 @@ export const PostList = (props: PostListProps): ReactElement => {
     );
   };
 
-  useEffect(
+  const data: { items: IPost[]; total: number } = useMemo(
     function getPageDataList() {
-      const start = (pagination.page - 1) * pagination.size;
-      const end = pagination.page * pagination.size;
+      const start = (currentPage - 1) * pageSize;
+      const end = currentPage * pageSize;
       let newPageDataList = posts;
+
       if (searchKey)
         newPageDataList = newPageDataList?.filter((data: IPost) =>
           Object.values(data).some((value) =>
             value?.toString().toLowerCase().includes(searchKey.toLowerCase())
           )
         );
-      setDataList(newPageDataList.slice(start, end));
+
+      const items = newPageDataList.slice(start, end);
+      const total = newPageDataList.length;
+      return { items, total };
     },
     // eslint-disable-next-line
-    [posts, searchKey, pagination]
+    [posts, searchKey, currentPage, pageSize]
   );
 
   return (
     <React.Fragment>
       <SearchField searchKey={searchKey} onSearchDocument={setSearchKey} />
-      {dataList.map((post) => (
+      {data.items.map((post) => (
         <Post
           key={post.id}
           post={post}
@@ -58,6 +57,16 @@ export const PostList = (props: PostListProps): ReactElement => {
           onUpdate={handleUpdatePost}
         />
       ))}
+      {data.total > 0 && (
+        <Pagination
+          total={data.total}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          paginationNumber={5}
+          onPageChanged={setCurrentPage}
+          onSizeChange={setPageSize}
+        />
+      )}
     </React.Fragment>
   );
 };

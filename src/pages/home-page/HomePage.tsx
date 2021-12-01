@@ -5,8 +5,6 @@ import { PostList, IPost, AddModal } from "./components";
 export const HomePage = (): ReactElement => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(15);
 
   const handleOpenAddModal = (): void => {
     setIsAddModalOpen(true);
@@ -30,11 +28,7 @@ export const HomePage = (): ReactElement => {
       >
         Create post
       </Button>
-      <PostList
-        pagination={{ page: currentPage, size: pageSize }}
-        posts={posts}
-        setPosts={setPosts}
-      />
+      <PostList posts={posts} setPosts={setPosts} />
       <AddModal
         isVisible={isAddModalOpen}
         onAddPost={handleAddPost}
