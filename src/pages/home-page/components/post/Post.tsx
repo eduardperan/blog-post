@@ -1,9 +1,12 @@
 import React, { ReactElement } from "react";
 
-export interface IPost {
-  id: number;
+export interface IPostItem {
   title: string;
   description: string;
+}
+
+export interface IPost extends IPostItem {
+  id: React.Key;
   dateCreated: Date;
 }
 
